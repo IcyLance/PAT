@@ -1,5 +1,5 @@
 import google.generativeai as genai
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 import os
 import sys
 
@@ -9,7 +9,13 @@ genai.configure(api_key=os.getenv("API_KEY"))
 
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-question = sys.argv[1]
-
-response = model.generate_content(question)
-print(response.text)
+question = ""
+convo = ''
+while(question != 'q'):
+    question = input('Input: ')
+    if(question != 'q'):
+        print('\n')
+        response = model.generate_content(question + convo)
+        print(response.text)
+        print('\n')
+        convo += question + '. '
