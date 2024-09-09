@@ -9,13 +9,11 @@ def main():
 
     model = genai.GenerativeModel('gemini-1.5-flash')
 
-    question = ""
-    convo = ''
+    question = ''
     while(question != 'q'):
         question = input('Input: ')
         if(question != 'q'):
             print('\n')
-            response = model.generate_content(question + convo)
+            response = model.generate_content(question)
             print(response.text)
             print('\n')
-            convo += question + '. '
