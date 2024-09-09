@@ -1,1 +1,4 @@
 .env
+env
+pat.egg-info
+__pycache__
