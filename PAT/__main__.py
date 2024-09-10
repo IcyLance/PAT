@@ -1,19 +1,14 @@
-import google.generativeai as genai
-from dotenv import load_dotenv
-import os
+from .funcmodule import gemini, sanitize
 
 def main():
-    load_dotenv()
-
-    genai.configure(api_key=os.getenv("API_KEY"))
-
-    model = genai.GenerativeModel('gemini-1.5-flash')
-
-    question = ''
-    while(question != 'q'):
-        question = input('Input: ')
-        if(question != 'q'):
-            print('\n')
-            response = model.generate_content(question)
-            print(response.text)
-            print('\n')
+    raw_q = ''
+    sani_q = ''
+    while(raw_q != 'q'):
+        raw_q = input('Input: ').strip()
+        if(raw_q == 'q'):
+            return
+        elif(raw_q == ''):
+            print("Input required\n")
+        else:
+            sani_q = sanitize(raw_q)
+            gemini(sani_q)
