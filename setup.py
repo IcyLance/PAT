@@ -10,6 +10,7 @@ setup(
     install_requires=[
         'python-dotenv <= 1.0.0',
         'google-generativeai',
+        'typer',
     ],
     entry_points={
         'console_scripts': [
