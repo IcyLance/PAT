@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='pat',
@@ -6,15 +6,15 @@ setup(
     author='William Oldert',
     descritption="Tool for discrete CLI AI usage. Built for pentesters.",
     license='LICENSE',
-    packages=['PAT'],
+    packages=find_packages(),
     install_requires=[
         'python-dotenv <= 1.0.0',
         'google-generativeai',
-        'typer',
+        'typer >= 0.12.5',
     ],
     entry_points={
         'console_scripts': [
-            'pat = PAT.__main__:main'
+            'pat = PAT.__main__:app'
         ]
     }
 )

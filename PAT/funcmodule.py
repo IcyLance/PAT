@@ -2,7 +2,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 import os
 
-def gemini(q):
+def gem(q):
 
     load_dotenv()
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
@@ -15,7 +15,7 @@ def gemini(q):
 
 
 def sanitize(in_q):
-    
+
     script_dir = os.path.dirname(__file__)
     file_path = os.path.join(script_dir, 'list.txt')
     f = open(file_path, 'r')
@@ -24,7 +24,7 @@ def sanitize(in_q):
     while(word):
         word = word.strip()
 
-        out_q = out_q.replace(word, 'example')
+        out_q = out_q.replace(word, 'example-company')
 
         word = f.readline()
     f.close()
