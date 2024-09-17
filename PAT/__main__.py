@@ -32,13 +32,11 @@ def gemini():
     Gemini-1.5-flash. Takes your question as INPUT after program start
     """
 
-    raw_q = ''
-    sani_q = ''
-    raw_q = input('Input: ').strip()
-    if(raw_q == 'q'):
+    question = ''
+    question = input('Input: ').strip()
+    if(question == 'q'):
         return
-    elif(raw_q == ''):
+    elif(question == ''):
         print("Input required\n")
     else:
-        sani_q = sanitize(raw_q)
-        gem(sani_q)
+        gem(question)
