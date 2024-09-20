@@ -8,7 +8,6 @@ def gem(q):
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     model = genai.GenerativeModel('gemini-1.5-flash')
     
-    q = sanitize(q)
     response = model.generate_content(q)
 
     print('\n')
@@ -17,7 +16,7 @@ def gem(q):
 
 comp_names = list()
 
-def sanitize(question):
+def sani(question):
 
     # load file with company names to check against the question
     script_dir = os.path.dirname(__file__)
@@ -34,8 +33,23 @@ def sanitize(question):
     f.close()
     return question
 
-def unsanitize(answer):
+def unsani(answer):
     for name in comp_names:
         answer = answer.replace('example-company', name)
         comp_names.pop()
     return answer
+
+def check_sani_q(question):
+
+    while(True):
+        print('Sanitized input:\n' + question + '\n')
+        yes_no = input("Specify more sanitizing? (yes/no): ")
+        if yes_no.lower() == "yes":
+            #ask for strings to sanitize one or more
+            add_sani_word = input("Word/phrase to remove: ")
+            add_sani_word = add_sani_word.strip()
+            question = question.replace(add_sani_word, "example-company")
+        elif yes_no.lower() == 'no':
+            break
+        else:
+            print("\nInvalid input. Enter 'yes' or 'no'\n")
