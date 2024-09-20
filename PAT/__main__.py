@@ -10,12 +10,10 @@ def callback():
     """
 
 @app.command()
-def gemini(sanitize: bool = True, check: bool = True):
+def gemini(question: str, sanitize: bool = True, check: bool = True):
     """
-    Gemini-1.5-flash. Takes your question as INPUT after program start
+    Gemini-1.5-flash.
     """
-    question = ''
-    question = input('Input: ').strip()
     if(question == 'q'):
         return
     elif(question == ''):
