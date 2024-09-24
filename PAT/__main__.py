@@ -1,5 +1,9 @@
 from .funcmodule import gem, sani, check_sani_q
+from typing_extensions import Annotated
+from typing import Optional
 import typer
+import select
+import sys
 
 app = typer.Typer()
 
@@ -10,17 +14,20 @@ def callback():
     """
 
 @app.command()
-def gemini(question: str, sanitize: bool = True, check: bool = True):
+def gemini(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: bool = True, check: bool = False):
     """
     Gemini-1.5-flash.
     """
-    if(question == 'q'):
+    if select.select([sys.stdin], [], [], 0)[0]:
+        question = sys.stdin.read().strip()
+
+    if question == 'q':
         return
-    elif(question == ''):
-        print("Input required\n")
+    elif question == None: 
+        print("Please input a question\n")
     else:
-        if(sanitize):
+        if sanitize:
             question = sani(question)
-        if(check):
+        if check:
             check_sani_q(question)
         gem(question)

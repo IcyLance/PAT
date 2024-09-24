@@ -6,6 +6,7 @@ def gem(q):
 
     load_dotenv()
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    
     model = genai.GenerativeModel('gemini-1.5-flash')
     
     response = model.generate_content(q)
@@ -45,7 +46,6 @@ def check_sani_q(question):
         print('Sanitized input:\n' + question + '\n')
         yes_no = input("Specify more sanitizing? (yes/no): ")
         if yes_no.lower() == "yes":
-            #ask for strings to sanitize one or more
             add_sani_word = input("Word/phrase to remove: ")
             add_sani_word = add_sani_word.strip()
             question = question.replace(add_sani_word, "example-company")
