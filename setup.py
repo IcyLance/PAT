@@ -11,6 +11,7 @@ setup(
         'python-dotenv <= 1.0.0',
         'google-generativeai',
         'typer >= 0.12.5',
+        'openai',
     ],
     entry_points={
         'console_scripts': [

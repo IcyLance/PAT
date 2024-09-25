@@ -1,6 +1,25 @@
 import google.generativeai as genai
 from dotenv import load_dotenv
+from openai import OpenAI
 import os
+
+def gpt(q):
+    load_dotenv()
+    client = OpenAI(
+        api_key=os.getenv('GPT_API_KEY')
+    )
+    chat_completion = client.chat.completions.create(
+        messages=[
+            {
+                "role": "user",
+                "content": q,
+            }
+        ],
+        model="gpt-3.5-turbo",
+    )
+
+    print(chat_completion.choices[0].message)
+
 
 def gem(q):
 
