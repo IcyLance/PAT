@@ -3,30 +3,59 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import os
 
-def gpt(q):
+def gpt_3(q):
     load_dotenv()
     client = OpenAI(
         api_key=os.getenv('GPT_API_KEY')
     )
     chat_completion = client.chat.completions.create(
+        model="gpt-3.5-turbo",
         messages=[
             {
                 "role": "user",
-                "content": q,
+                "content": q
             }
-        ],
-        model="gpt-3.5-turbo",
+        ]   
     )
 
     print(chat_completion.choices[0].message)
 
+def gpt_4(q):
+    load_dotenv()
+    client = OpenAI(
+        api_key=os.getenv('GPT_API_KEY')
+    )
+    chat_completion = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": q
+            }
+        ]   
+    )
 
-def gem(q):
+    print(chat_completion.choices[0].message)
+
+def gem_f(q):
 
     load_dotenv()
     genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
     
     model = genai.GenerativeModel('gemini-1.5-flash')
+    
+    response = model.generate_content(q)
+
+    print('\n')
+    print(response.text)
+    print('\n')
+
+def gem_p(q):
+
+    load_dotenv()
+    genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+    
+    model = genai.GenerativeModel('gemini-1.5-pro')
     
     response = model.generate_content(q)
 
