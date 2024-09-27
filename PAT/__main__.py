@@ -11,10 +11,16 @@ app = typer.Typer()
 def callback():
     """
     Choose an AI model you want to use. ***Please be sure you have obtained the corresponding API key***.
+    Can use the pipe operator to give PAT a file as a question. **Currently --check doesn't work with piping**.
     """
 
 @app.command()
-def geminiP(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: bool = True, check: bool = False):
+def geminiP(
+    question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
+    sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
+    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    ):
+
     """
     Gemini-1.5-pro.
     """
@@ -33,7 +39,12 @@ def geminiP(question: Annotated[Optional[str], typer.Argument()] = None, sanitiz
         gem_p(question)
 
 @app.command()
-def geminiF(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: bool = True, check: bool = False):
+def geminiF(
+    question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
+    sanitize: bool = typer.Option(True, help="Cleans input of sensitive info such as company names, phone numbers, and emails"), 
+    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    ):
+
     """
     Gemini-1.5-flash.
     """
@@ -52,9 +63,14 @@ def geminiF(question: Annotated[Optional[str], typer.Argument()] = None, sanitiz
         gem_f(question)
 
 @app.command()
-def gpt3(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: bool = True, check: bool = False):
+def gpt3(
+    question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
+    sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
+    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    ):
+
     """
-    Gpt-3.5-turbo ***UNTESTED***
+    Gpt-3.5-turbo ***UNTESTED*** 
     """
     if select.select([sys.stdin], [], [], 0)[0]:
         question = sys.stdin.read().strip()
@@ -71,7 +87,12 @@ def gpt3(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: 
         gpt_3(question)
 
 @app.command()
-def gpt4(question: Annotated[Optional[str], typer.Argument()] = None, sanitize: bool = True, check: bool = False):
+def gpt4(
+    question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
+    sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
+    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    ):
+
     """
     Gpt-4o-mini ***UNTESTED***
     """

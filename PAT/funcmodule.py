@@ -2,6 +2,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
+import re
 
 def gpt_3(q):
     load_dotenv()
@@ -67,6 +68,11 @@ comp_names = list()
 
 def sani(question):
 
+    # Remove sensitive patterns like emails and phone numbers
+    question = re.sub(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b', '[REDACTED EMAIL]', question)  # Remove emails
+    question = re.sub(r'\b\d{3}[-.\s]??\d{3}[-.\s]??\d{4}\b', '[REDACTED PHONE]', question)  # Remove phone numbers
+    
+
     # load file with company names to check against the question
     script_dir = os.path.dirname(__file__)
     file_path = os.path.join(script_dir, 'list.txt')
@@ -76,6 +82,7 @@ def sani(question):
     comp_name = f.readline()
     while(comp_name):
         comp_name = comp_name.strip() # strip white spaces from ends
+        question = question.lower()
         question = question.replace(comp_name, 'example-company') #replace the found strings with 'example-company'
         comp_names.append(comp_name) #store the company name to later replace back in before output
         comp_name = f.readline()
