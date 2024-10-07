@@ -83,7 +83,7 @@ def sani(question):
     while(comp_name):
         comp_name = comp_name.strip() # strip white spaces from ends
         question = question.lower()
-        question = question.replace(comp_name, 'example-company') #replace the found strings with 'example-company'
+        question = question.replace(comp_name.lower(), 'example-company') #replace the found strings with 'example-company'
         comp_names.append(comp_name) #store the company name to later replace back in before output
         comp_name = f.readline()
     f.close()
