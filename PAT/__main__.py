@@ -2,8 +2,11 @@ from .funcmodule import gem_f, sani, check_sani_q, gpt_3, gpt_4, gem_p
 from typing_extensions import Annotated
 from typing import Optional
 import typer
-import select
+import os
 import sys
+from stat import S_ISFIFO
+import tty
+import termios
 
 app = typer.Typer()
 
@@ -24,19 +27,27 @@ def geminiP(
     """
     Gemini-1.5-pro.
     """
-    if select.select([sys.stdin], [], [], 0)[0]:
+    piping = S_ISFIFO(os.fstat(0).st_mode)
+    if piping:
         question = sys.stdin.read().strip()
 
     if question == 'q':
         return
     elif question == None: 
         print("Please input a question\n")
-    else:
-        if sanitize:
-            question = sani(question)
-        if check:
+        return
+ 
+    if sanitize:
+        question = sani(question)
+
+    if check:
+        if piping:
+            sys.stdin = open('/dev/tty', 'r')
             check_sani_q(question)
-        gem_p(question)
+        else:
+            check_sani_q(question)
+    
+    gem_p(question)
 
 @app.command()
 def geminiF(
@@ -48,19 +59,27 @@ def geminiF(
     """
     Gemini-1.5-flash.
     """
-    if select.select([sys.stdin], [], [], 0)[0]:
+    piping = S_ISFIFO(os.fstat(0).st_mode)
+    if piping:
         question = sys.stdin.read().strip()
 
     if question == 'q':
         return
     elif question == None: 
         print("Please input a question\n")
-    else:
-        if sanitize:
-            question = sani(question)
-        if check:
+        return
+ 
+    if sanitize:
+        question = sani(question)
+
+    if check:
+        if piping:
+            sys.stdin = open('/dev/tty', 'r')
             check_sani_q(question)
-        gem_f(question)
+        else:
+            check_sani_q(question)
+    
+    gem_f(question)
 
 @app.command()
 def gpt3(
@@ -72,19 +91,27 @@ def gpt3(
     """
     Gpt-3.5-turbo ***UNTESTED*** 
     """
-    if select.select([sys.stdin], [], [], 0)[0]:
+    piping = S_ISFIFO(os.fstat(0).st_mode)
+    if piping:
         question = sys.stdin.read().strip()
 
     if question == 'q':
         return
     elif question == None: 
         print("Please input a question\n")
-    else:
-        if sanitize:
-            question = sani(question)
-        if check:
+        return
+ 
+    if sanitize:
+        question = sani(question)
+
+    if check:
+        if piping:
+            sys.stdin = open('/dev/tty', 'r')
             check_sani_q(question)
-        gpt_3(question)
+        else:
+            check_sani_q(question)
+    
+    gpt_3(question)
 
 @app.command()
 def gpt4(
@@ -96,16 +123,25 @@ def gpt4(
     """
     Gpt-4o-mini ***UNTESTED***
     """
-    if select.select([sys.stdin], [], [], 0)[0]:
+
+    piping = S_ISFIFO(os.fstat(0).st_mode)
+    if piping:
         question = sys.stdin.read().strip()
 
     if question == 'q':
         return
     elif question == None: 
         print("Please input a question\n")
-    else:
-        if sanitize:
-            question = sani(question)
-        if check:
+        return
+ 
+    if sanitize:
+        question = sani(question)
+
+    if check:
+        if piping:
+            sys.stdin = open('/dev/tty', 'r')
             check_sani_q(question)
-        gpt_4(question)
+        else:
+            check_sani_q(question)
+    
+    gpt_4(question)
