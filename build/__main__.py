@@ -5,8 +5,6 @@ import typer
 import os
 import sys
 from stat import S_ISFIFO
-import tty
-import termios
 
 app = typer.Typer()
 
