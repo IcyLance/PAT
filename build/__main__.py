@@ -13,15 +13,16 @@ app = typer.Typer()
 @app.callback()
 def callback():
     """
-    Choose an AI model you want to use. ***Please be sure you have obtained the corresponding API key***.
-    Can use the pipe operator to give PAT a file as a question. **Currently --check doesn't work with piping**.
+    Choose an AI model you want to use. ***Be sure you have obtained the corresponding API key***.
+    Can use the pipe operator to provide a question to PAT. 
+    echo "Hello" | pat geminif
     """
 
 @app.command()
 def geminiP(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
     ):
 
     """
@@ -53,7 +54,7 @@ def geminiP(
 def geminiF(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="Cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
     ):
 
     """
@@ -85,7 +86,7 @@ def geminiF(
 def gpt3(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
     ):
 
     """
@@ -117,7 +118,7 @@ def gpt3(
 def gpt4(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(False, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
     ):
 
     """
