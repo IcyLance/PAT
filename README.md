@@ -14,7 +14,7 @@ Go [here](https://aistudio.google.com/app/apikey) to get an API key for the Gemi
 
 Go [here](https://platform.openai.com/api-keys) for gpt API key. Beware this will require an account and payment.
 
-**--Notice GPT models havent been fully tested.--**
+**--NOTICE: GPT models havent been fully tested.--**
 
 Once you have your API key(s) find the build folder.
 ``` bash
