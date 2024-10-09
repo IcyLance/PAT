@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='pat',
-    version='0.0.1',
+    version='1.0.0',
     author='William Oldert',
     descritption="Tool for discrete CLI AI usage. Built for pentesters.",
     license='LICENSE',
@@ -15,7 +15,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'pat = PAT.__main__:app'
+            'pat = build.__main__:app'
         ]
     }
 )
