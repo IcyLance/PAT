@@ -96,7 +96,6 @@ def unsani(answer):
     return answer
 
 def check_sani_q(question):
-
     while(True):
         print('Sanitized input:\n' + question + '\n')
         yes_no = input("Specify more sanitizing? (yes/no): ")
