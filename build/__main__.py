@@ -33,7 +33,6 @@ def geminiP(
     if question == 'q':
         return
     
-    #fix
     if question == None: 
         print("Please input a question\n")
         return
@@ -66,7 +65,8 @@ def geminiF(
 
     if question == 'q':
         return
-    elif question == None: 
+    
+    if question == None: 
         print("Please input a question\n")
         return
  
@@ -98,7 +98,8 @@ def gpt3(
 
     if question == 'q':
         return
-    elif question == None: 
+        
+    if question == None: 
         print("Please input a question\n")
         return
  
@@ -131,7 +132,8 @@ def gpt4(
 
     if question == 'q':
         return
-    elif question == None: 
+        
+    if question == None: 
         print("Please input a question\n")
         return
  
