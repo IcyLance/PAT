@@ -18,7 +18,7 @@ def callback():
 
 @app.command()
 def geminiP(
-    question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
+    question: Annotated[str, typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
     check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
     ):
@@ -32,7 +32,9 @@ def geminiP(
 
     if question == 'q':
         return
-    elif question == None: 
+    
+    #fix
+    if question == None: 
         print("Please input a question\n")
         return
  
