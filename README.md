@@ -20,12 +20,12 @@ Once you have your API key(s) find the build folder.
 ``` bash
 cd build
 ```
-Then in create a .env file.
+Then inside the build directory, create a .env file.
+Be sure that the file is simply ".env" as only then will the program work.
 Please be careful of pushing any changes with you API key in it.
 ``` bash
-mkdir "FILE_NAME".env
+mkdir .env
 ```
-
 Copy sample.env into your new .env file, replacing "YOUR_API_KEY" with your API key.
 
 
