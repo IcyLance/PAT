@@ -2,3 +2,5 @@
 env
 pat.egg-info
 __pycache__
+file.txt
+answer.txt

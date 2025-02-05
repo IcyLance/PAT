@@ -20,7 +20,8 @@ def callback():
 def geminiP(
     question: Annotated[str, typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize"),
+    f: bool = typer.Option(False, help="Writes the answer or output to a file called answer.txt")
     ):
 
     """
@@ -34,7 +35,7 @@ def geminiP(
         return
     
     if question == None: 
-        print("Please input a question\n")
+        print("\n [-] Please input a question\n")
         return
  
     if sanitize:
@@ -47,13 +48,22 @@ def geminiP(
         else:
             check_sani_q(question)
     
-    gem_p(question)
+    answer = gem_p(question)
+    if f:
+        try:
+            with open('answer.txt', 'w') as out_file:
+                out_file.write(answer)
+        except Exception as e:
+            print(f"Error when attempting to write answer to file: ", e)
+    else:
+        print("\n", answer, "\n")
 
 @app.command()
 def geminiF(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="Cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize"),
+    f: bool = typer.Option(False, help="Writes the answer or output to a file called answer.txt")
     ):
 
     """
@@ -67,7 +77,7 @@ def geminiF(
         return
     
     if question == None: 
-        print("Please input a question\n")
+        print("\n [-] Please input a question\n")
         return
  
     if sanitize:
@@ -80,13 +90,23 @@ def geminiF(
         else:
             check_sani_q(question)
     
-    gem_f(question)
+    answer = gem_f(question)
+    if f:
+        try:
+            with open('answer.txt', 'w') as out_file:
+                out_file.write(answer)
+        except Exception as e:
+            print(f"Error when attempting to write answer to file: ", e)
+    else:
+        print("\n\n", answer, "\n")
+
 
 @app.command()
 def gpt3(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize"),
+    f: bool = typer.Option(False, help="Writes the answer or output to a file called answer.txt")
     ):
 
     """
@@ -100,7 +120,7 @@ def gpt3(
         return
         
     if question == None: 
-        print("Please input a question\n")
+        print("\n [-] Please input a question\n")
         return
  
     if sanitize:
@@ -113,13 +133,22 @@ def gpt3(
         else:
             check_sani_q(question)
     
-    gpt_3(question)
+    answer = gpt_3(question)
+    if f:
+        try:
+            with open('answer.txt', 'w') as out_file:
+                out_file.write(answer)
+        except Exception as e:
+            print(f"Error when attempting to write answer to file: ", e)
+    else:
+        print("\n\n", answer, "\n")
 
 @app.command()
 def gpt4(
     question: Annotated[Optional[str], typer.Argument(help="Input to the AI")] = None, 
     sanitize: bool = typer.Option(True, help="cleans input of sensitive info such as company names, phone numbers, and emails"), 
-    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize")
+    check: bool = typer.Option(True, help="Prompts you with the sanitized input before sending. Can specifiy more info to sanitize"),
+    f: bool = typer.Option(False, help="Writes the answer or output to a file called answer.txt")
     ):
 
     """
@@ -132,11 +161,11 @@ def gpt4(
 
     if question == 'q':
         return
-        
+
     if question == None: 
-        print("Please input a question\n")
+        print("\n [-] Please input a question\n")
         return
- 
+
     if sanitize:
         question = sani(question)
 
@@ -147,4 +176,12 @@ def gpt4(
         else:
             check_sani_q(question)
     
-    gpt_4(question)
+    answer = gpt_4(question)
+    if f:
+        try:
+            with open('answer.txt', 'w') as out_file:
+                out_file.write(answer)
+        except Exception as e:
+            print(f"Error when attempting to write answer to file: ", e)
+    else:
+        print("\n\n", answer, "\n")

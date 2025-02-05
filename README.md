@@ -3,9 +3,13 @@
 ## Description
 Tool for discrete CLI AI usage. Built for pentesters.
 
-Clears your question of most company names, phone numbers, and emails.
+Clears your question of most company names, phone numbers, emails, IPv4 an IPv6 addresses.
 
 Currently only supports gemini 1.5 flash and pro, gpt 3.5 turbo and 4.
+
+#### Additionally
+If you notice a company name that you have to specify for redaction please either open an issue or add it to list.txt and submit a pull request.
+Same for if you notice any other issues or errors!
 
 ## API keys
 Before using PAT you will need to get an API key from your prefered AI model.
@@ -38,13 +42,15 @@ sudo apt-get install python3-venv
 ```
 
 Create the environment.
+The 2nd venv is the name. You can change its name at will.
 ```bash
-python3 -m venv env #(env is the name. can change at will)
+python3 -m venv venv 
 ```
 
 Run the environment.
+Be sure you replace venv with whatever you named your venv file, if you changed it.
 ```bash
-source env/bin/activate
+source venv/bin/activate
 ```
 
 Make sure you are in the PAT directory, then install.
@@ -55,3 +61,9 @@ Finally run pat
 ```bash
 pat
 ```
+
+Additional features to add:
+Implement more error checking.
+Make converstions possible?
+Add locations to sanitizer?
+Only replace company name if capitalized?
